@@ -1,10 +1,11 @@
 {
-  "name": "neo",
+  "name": "multi-verse-1",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "deploy:image": "docker buildx build --push --provenance false --target image -t $REGISTRY/multi-verse-1:$IMAGE_TAG ."
   },
   "dependencies": {},
   "devDependencies": {
