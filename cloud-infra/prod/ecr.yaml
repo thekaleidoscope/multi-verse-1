@@ -1,0 +1,13 @@
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: example-ecr
+spec:
+  forProvider:
+    region: us-east-1
+    imageScanningConfiguration:
+      scanOnPush: true
+    tags:
+      environment: dev
+  providerConfigRef:
+    name: aws-provider

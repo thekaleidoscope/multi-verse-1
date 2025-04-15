@@ -1,0 +1,10 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: example-bucket-prod
+spec:
+  forProvider:
+    region: us-east-1
+    acl: private
+  providerConfigRef:
+    name: aws-provider
