@@ -12,3 +12,7 @@ yarn-error.log*
 .vscode/*
 
 .idea
+
+Chart.lock
+charts
+*.tgz
