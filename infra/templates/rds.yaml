@@ -1,22 +1,27 @@
+---
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: DBInstance
 metadata:
-  name: example-db
+  name: {{ .Values.serviceName }}-db
 spec:
   forProvider:
-    region: us-east-1
+    region: {{ .Values.region }}
     allocatedStorage: 20
     engine: postgres
     engineVersion: "14.1"
-    instanceClass: db.t3.micro
-    username: masteruser
+    instanceClass: {{ .Values.rds.instanceClass }}
+    username: {{ .Values.rds.username }}
     passwordSecretRef:
       namespace: crossplane-system
-      name: rds-secret
+      name: {{ .Values.rds.passwordSecretName }}
       key: password
     skipFinalSnapshotBeforeDeletion: true
+    tags:
+      {{- range $key, $val := .Values.tags }}
+      {{ $key }}: {{ $val | quote }}
+      {{- end }}
   writeConnectionSecretToRef:
-    name: rds-conn
+    name: {{ .Values.serviceName }}-rds-conn
     namespace: crossplane-system
   providerConfigRef:
     name: aws-provider

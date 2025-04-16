@@ -1,3 +1,16 @@
+serviceName: myapp
+region: us-west-1
+
+rds:
+  instanceClass: db.m5.large
+  username: masteruser
+  passwordSecretName: rds-secret
+
+tags:
+  environment: development
+  team: devops
+
+
 multi-verse-1:
 
   replicaCount: 1

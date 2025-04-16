@@ -1,13 +1,16 @@
+---
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
-  name: example-ecr
+  name: {{ .Values.serviceName }}-ecr
 spec:
   forProvider:
-    region: us-east-1
+    region: {{ .Values.region }}
     imageScanningConfiguration:
       scanOnPush: true
     tags:
-      environment: dev
+      {{- range $key, $val := .Values.tags }}
+      {{ $key }}: {{ $val | quote }}
+      {{- end }}
   providerConfigRef:
     name: aws-provider
