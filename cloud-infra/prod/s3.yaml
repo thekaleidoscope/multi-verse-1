@@ -1,10 +1,64 @@
-apiVersion: s3.aws.upbound.io/v1beta1
+apiVersion: s3.aws.upbound.io/v1beta2
 kind: Bucket
 metadata:
-  name: example-bucket-prod
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/bucket
+  labels:
+    testing.upbound.io/example-name: example-bucket
+  name: example-bucket
 spec:
   forProvider:
-    region: us-east-1
+    objectLockEnabled: true
+    region: us-west-1
+    tags:
+      Name: SampleBucket
+---
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: BucketACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/bucketacl
+  name: example-bucket-acl
+spec:
+  forProvider:
     acl: private
-  providerConfigRef:
-    name: aws-provider
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bucket
+    region: us-west-1
+---
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: BucketLogging
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/bucketlogging
+  labels:
+    testing.upbound.io/example-name: example-bucket
+  name: example-bucket-logging
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bucket
+    region: us-west-1
+    targetBucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bucket
+    targetPrefix: log/
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketPublicAccessBlock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketpublicaccessblock
+  labels:
+    testing.upbound.io/example-name: example-bucket
+  name: example-bucket-public-access
+spec:
+  forProvider:
+    blockPublicAcls: false
+    blockPublicPolicy: false
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bucket
+    region: us-west-1
