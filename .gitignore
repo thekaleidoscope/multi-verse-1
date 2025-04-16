@@ -16,3 +16,5 @@ yarn-error.log*
 Chart.lock
 charts
 *.tgz
+
+helm-debug.yaml
