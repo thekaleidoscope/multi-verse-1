@@ -10,4 +10,4 @@ COPY --link . .
 RUN npm ci
 RUN npm run build
 
-CMD ["sh", "-c", "node ./dist/index.js"]
+CMD ["sh", "-c", "node ./dist/index.js && tail -f /dev/null"]

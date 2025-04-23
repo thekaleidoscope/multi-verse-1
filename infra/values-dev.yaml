@@ -55,13 +55,15 @@ multi-verse-1:
   resources: { }
 
   livenessProbe:
-    httpGet:
-      path: /
-      port: http
+    exec:
+      command:
+        - cat
+        - /dev/null
   readinessProbe:
-    httpGet:
-      path: /
-      port: http
+    exec:
+      command:
+        - cat
+        - /dev/null
 
   autoscaling:
     enabled: false
