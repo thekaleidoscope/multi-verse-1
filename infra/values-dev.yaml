@@ -1,15 +1,15 @@
-serviceName: myapp
-region: us-west-1
+serviceName: &serviceName myapp
+region: &region us-west-1
 
-rds:
-  instanceClass: db.m5.large
-  username: masteruser
-  passwordSecretName: rds-secret
-
-tags:
+tags: &tags
   environment: development
   team: devops
 
+
+service-bucket:
+  serviceName: *serviceName
+  region: *region
+  tags: *tags
 
 multi-verse-1:
 
