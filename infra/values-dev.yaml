@@ -16,7 +16,7 @@ multi-verse-1:
   replicaCount: 1
 
   image:
-    repository: nginx
+    repository: *serviceName
     pullPolicy: IfNotPresent
     tag: ""
 
