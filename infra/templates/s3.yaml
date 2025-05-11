@@ -1,0 +1,13 @@
+apiVersion: zion.com/v1alpha1
+kind: BucketClaim
+metadata:
+  name: {{ include "helm-template.fullname" . }}
+spec:
+  serviceName: {{ $.Values.serviceBucket.serviceName }}
+  region: {{ $.Values.serviceBucket.region }}
+  tags:
+    {{- range $key, $value := $.Values.serviceBucket.tags }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  blockPublicAcls: {{ default true $.Values.serviceBucket.blockPublicAcls }}
+  blockPublicPolicy: {{ default true $.Values.serviceBucket.blockPublicPolicy }}

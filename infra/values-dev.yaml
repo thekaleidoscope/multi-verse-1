@@ -6,7 +6,7 @@ tags: &tags
   team: devops
 
 
-service-bucket:
+serviceBucket:
   serviceName: *serviceName
   region: *region
   tags: *tags
